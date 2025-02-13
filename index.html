@@ -331,7 +331,7 @@
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <form id="custom-form" class="php-email-form">
+        <form id="custom-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
                 <div class="col-md-4 form-group">
                     <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -382,6 +382,8 @@
   document.getElementById("custom-form").addEventListener("submit", function(event) {
       event.preventDefault();
       
+      const hutk = document.cookie.match(/hubspotutk=([^;]+)/)?.[1] || "";
+      
       const formData = {
           fields: [
               { name: "firstname", value: document.getElementById("name").value },
@@ -391,7 +393,12 @@
               { name: "category", value: document.getElementById("department").value },
               { name: "region", value: document.getElementById("region").value },
               { name: "message", value: document.querySelector("textarea[name='message']").value }
-          ]
+          ],
+          context: {
+              hutk: hutk,
+              pageUri: window.location.href,
+              pageName: document.title
+          }
       };
       
       fetch("https://api.hsforms.com/submissions/v3/integration/submit/49304493/c728b270-369b-4933-81cd-e646bdec7ffd", {
@@ -411,6 +418,7 @@
       });
   });
 </script>
+
 
 
 <!-- /Appointment Section -->
