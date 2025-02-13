@@ -385,15 +385,22 @@
       const hutk = document.cookie.match(/hubspotutk=([^;]+)/)?.[1] || "";
       
       const formData = {
-          fields: [
-              { name: "firstname", value: document.getElementById("name").value },
-              { name: "email", value: document.getElementById("email").value },
-              { name: "phone", value: document.getElementById("phone").value },
-              { name: "appointment_date", value: document.getElementById("date").value },
-              { name: "category", value: document.getElementById("department").value },
-              { name: "region", value: document.getElementById("region").value },
-              { name: "message", value: document.querySelector("textarea[name='message']").value }
-          ],
+    fields: [
+        { name: "firstname", value: document.getElementById("name").value },
+        { name: "email", value: document.getElementById("email").value },
+        { name: "phone", value: document.getElementById("phone").value },
+        { name: "appointment_date", value: document.getElementById("date").value },
+        { name: "category", value: document.getElementById("department").value },
+        { name: "region", value: document.getElementById("region").value },
+        { name: "message", value: document.querySelector("textarea[name='message']").value }
+    ],
+    context: {
+        hutk: document.cookie.match(/hubspotutk=([^;]+)/)?.[1] || "",
+        pageUri: window.location.href,
+        pageName: document.title
+    }
+};
+
           context: {
               hutk: hutk,
               pageUri: window.location.href,
